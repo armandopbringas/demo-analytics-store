@@ -16,10 +16,10 @@ export default async function ProductsPage() {
   return (
     <div>
       <h1>Productos</h1>
-      <p>Catálogo demo con FakeStoreAPI.</p>
+      <p>Catálogo demo con DummyJSON.</p>
       {errorMessage && (
         <div className="notice">
-          No pudimos cargar el catálogo desde FakeStoreAPI. Intenta recargar.
+          No pudimos cargar el catálogo desde DummyJSON. Intenta recargar.
         </div>
       )}
       <div className="grid">

@@ -1,6 +1,6 @@
 # Demo Analytics Store
 
-MVP de e-commerce para portafolio de Digital Analytics. Usa Next.js (App Router) + TypeScript y FakeStoreAPI.
+MVP de e-commerce para portafolio de Digital Analytics. Usa Next.js (App Router) + TypeScript y DummyJSON.
 
 ## Requisitos
 - Node.js 18+
