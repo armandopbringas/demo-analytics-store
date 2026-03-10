@@ -9,6 +9,13 @@ type AnalyticsEvent = {
   params: Record<string, unknown>;
 };
 
+function sendToGA(event_name: string, params: Record<string, unknown>) {
+  if (typeof window === 'undefined') return;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const gtag = (window as any).gtag as ((...args: unknown[]) => void) | undefined;
+  gtag?.('event', event_name, params);
+}
+
 function logEvent(event: AnalyticsEvent) {
   const payload = { ...event, ts: new Date().toISOString() };
   console.log('[analytics]', payload);
@@ -27,49 +34,57 @@ function logEvent(event: AnalyticsEvent) {
 }
 
 export function trackViewItem(product: Product) {
+  const params = {
+    item_id: product.id,
+    item_name: product.title,
+    price: product.price,
+    currency: CURRENCY
+  };
   logEvent({
     event_name: 'view_item',
-    params: {
-      item_id: product.id,
-      item_name: product.title,
-      price: product.price,
-      currency: CURRENCY
-    }
+    params
   });
+  sendToGA('view_item', params);
 }
 
 export function trackAddToCart(product: Product, qty: number) {
+  const params = {
+    item_id: product.id,
+    item_name: product.title,
+    price: product.price,
+    quantity: qty,
+    currency: CURRENCY
+  };
   logEvent({
     event_name: 'add_to_cart',
-    params: {
-      item_id: product.id,
-      item_name: product.title,
-      price: product.price,
-      quantity: qty,
-      currency: CURRENCY
-    }
+    params
   });
+  sendToGA('add_to_cart', params);
 }
 
 export function trackBeginCheckout(cartSummary: CartSummary) {
+  const params = {
+    value: cartSummary.subtotal,
+    currency: CURRENCY,
+    items_count: cartSummary.items_count
+  };
   logEvent({
     event_name: 'begin_checkout',
-    params: {
-      value: cartSummary.subtotal,
-      currency: CURRENCY,
-      items_count: cartSummary.items_count
-    }
+    params
   });
+  sendToGA('begin_checkout', params);
 }
 
 export function trackPurchase(orderSummary: OrderSummary) {
+  const params = {
+    transaction_id: orderSummary.order_id,
+    value: orderSummary.total,
+    currency: CURRENCY,
+    items_count: orderSummary.items_count
+  };
   logEvent({
     event_name: 'purchase',
-    params: {
-      transaction_id: orderSummary.order_id,
-      value: orderSummary.total,
-      currency: CURRENCY,
-      items_count: orderSummary.items_count
-    }
+    params
   });
+  sendToGA('purchase', params);
 }

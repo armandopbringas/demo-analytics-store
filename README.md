@@ -49,6 +49,13 @@ Ruta: `/debug`
 2. En Vercel, agrega la misma variable en **Environment Variables** (Production).
 3. Verificación: abre el sitio en incógnito y revisa **Realtime** en GA4 para ver el usuario activo.
 
+## GA4 events
+Estos eventos del funnel ahora se envían a GA4 vía `gtag('event', ...)` además del log local para `/debug`:
+- `view_item`
+- `add_to_cart`
+- `begin_checkout`
+- `purchase`
+
 ## Notas
 - Persistencia del carrito en `localStorage`.
 - Al completar compra se genera `order_id` y se guarda un resumen de la orden en `localStorage`.
