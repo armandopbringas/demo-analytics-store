@@ -1,20 +1,25 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useCart } from '@/lib/cart-context';
 import { trackAddToCart, trackViewItem } from '@/lib/analytics';
 import type { Product } from '@/lib/types';
 
 export function ProductDetailClient({ product }: { product: Product }) {
   const { addToCart } = useCart();
+  const viewedIdRef = useRef<number | null>(null);
 
   useEffect(() => {
+    if (viewedIdRef.current === product.id) return;
+    viewedIdRef.current = product.id;
+    // Tracking: view_item
     trackViewItem(product);
   }, [product]);
 
   const handleAdd = () => {
     addToCart(product, 1);
+    // Tracking: add_to_cart
     trackAddToCart(product, 1);
   };
 

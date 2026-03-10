@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-context';
 import { trackBeginCheckout, trackPurchase } from '@/lib/analytics';
@@ -13,12 +13,17 @@ export default function CheckoutPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const beginCheckoutTrackedRef = useRef(false);
+  const purchaseTrackedRef = useRef(false);
 
   useEffect(() => {
     if (itemsCount === 0) {
       router.replace('/cart');
       return;
     }
+    if (beginCheckoutTrackedRef.current) return;
+    beginCheckoutTrackedRef.current = true;
+    // Tracking: begin_checkout
     trackBeginCheckout({ subtotal, items_count: itemsCount });
   }, [itemsCount, subtotal, router]);
 
@@ -48,7 +53,11 @@ export default function CheckoutPage() {
       window.localStorage.setItem(LAST_ORDER_KEY, JSON.stringify(orderSummary));
     }
 
-    trackPurchase(orderSummary);
+    if (!purchaseTrackedRef.current) {
+      purchaseTrackedRef.current = true;
+      // Tracking: purchase
+      trackPurchase(orderSummary);
+    }
     clearCart();
     router.push(`/thank-you?order_id=${order_id}`);
   };

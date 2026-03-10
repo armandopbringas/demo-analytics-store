@@ -1,21 +1,65 @@
 import type { CartSummary, OrderSummary, Product } from './types';
 
+const LAST_EVENT_KEY = 'last_analytics_event';
+const CURRENCY = 'USD';
+
+type AnalyticsEvent = {
+  event_name: 'view_item' | 'add_to_cart' | 'begin_checkout' | 'purchase';
+  params: Record<string, unknown>;
+};
+
+function logEvent(event: AnalyticsEvent) {
+  const payload = { ...event, ts: new Date().toISOString() };
+  console.log('[analytics]', payload);
+  if (typeof window !== 'undefined') {
+    window.localStorage.setItem(LAST_EVENT_KEY, JSON.stringify(payload));
+  }
+}
+
 export function trackViewItem(product: Product) {
-  // Stub for analytics view_item
-  console.log('[analytics] view_item', { product });
+  logEvent({
+    event_name: 'view_item',
+    params: {
+      item_id: product.id,
+      item_name: product.title,
+      price: product.price,
+      currency: CURRENCY
+    }
+  });
 }
 
 export function trackAddToCart(product: Product, qty: number) {
-  // Stub for analytics add_to_cart
-  console.log('[analytics] add_to_cart', { product, qty });
+  logEvent({
+    event_name: 'add_to_cart',
+    params: {
+      item_id: product.id,
+      item_name: product.title,
+      price: product.price,
+      quantity: qty,
+      currency: CURRENCY
+    }
+  });
 }
 
 export function trackBeginCheckout(cartSummary: CartSummary) {
-  // Stub for analytics begin_checkout
-  console.log('[analytics] begin_checkout', { cartSummary });
+  logEvent({
+    event_name: 'begin_checkout',
+    params: {
+      value: cartSummary.subtotal,
+      currency: CURRENCY,
+      items_count: cartSummary.items_count
+    }
+  });
 }
 
 export function trackPurchase(orderSummary: OrderSummary) {
-  // Stub for analytics purchase
-  console.log('[analytics] purchase', { orderSummary });
+  logEvent({
+    event_name: 'purchase',
+    params: {
+      transaction_id: orderSummary.order_id,
+      value: orderSummary.total,
+      currency: CURRENCY,
+      items_count: orderSummary.items_count
+    }
+  });
 }
