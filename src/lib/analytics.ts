@@ -1,6 +1,7 @@
 import type { CartSummary, OrderSummary, Product } from './types';
 
 const LAST_EVENT_KEY = 'last_analytics_event';
+const EVENTS_LIST_KEY = 'analytics_events';
 const CURRENCY = 'USD';
 
 type AnalyticsEvent = {
@@ -13,6 +14,15 @@ function logEvent(event: AnalyticsEvent) {
   console.log('[analytics]', payload);
   if (typeof window !== 'undefined') {
     window.localStorage.setItem(LAST_EVENT_KEY, JSON.stringify(payload));
+    try {
+      const raw = window.localStorage.getItem(EVENTS_LIST_KEY);
+      const list = raw ? JSON.parse(raw) : [];
+      const next = Array.isArray(list) ? [...list, payload] : [payload];
+      window.localStorage.setItem(EVENTS_LIST_KEY, JSON.stringify(next));
+      window.dispatchEvent(new CustomEvent('analytics_event', { detail: payload }));
+    } catch {
+      // ignore storage errors
+    }
   }
 }
 
