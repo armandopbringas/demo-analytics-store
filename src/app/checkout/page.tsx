@@ -64,15 +64,15 @@ export default function CheckoutPage() {
 
   return (
     <div>
-      <h1>Checkout</h1>
+      <h1>Pago</h1>
       <div className="summary" style={{ marginBottom: 16 }}>
         <div><strong>Subtotal:</strong> ${subtotal.toFixed(2)}</div>
-        <div><strong>Items:</strong> {itemsCount}</div>
+        <div><strong>Productos:</strong> {itemsCount}</div>
       </div>
 
       <form className="form" onSubmit={handleSubmit}>
         <label>
-          Name
+          Nombre
           <input className="input" value={name} onChange={e => setName(e.target.value)} />
         </label>
         <label>
@@ -80,7 +80,7 @@ export default function CheckoutPage() {
           <input className="input" value={email} onChange={e => setEmail(e.target.value)} />
         </label>
         {error && <div className="notice">{error}</div>}
-        <button className="button" type="submit">Complete purchase</button>
+        <button className="button" type="submit">Completar compra</button>
       </form>
     </div>
   );

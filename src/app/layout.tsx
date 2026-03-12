@@ -3,6 +3,8 @@ import Link from 'next/link';
 import Script from 'next/script';
 import { Providers } from './providers';
 import { GA_ID } from '@/lib/gtag';
+import { NavCartLink } from '@/components/nav-cart-link';
+import { FiShoppingBag } from 'react-icons/fi';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -16,10 +18,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Providers>
           <nav className="nav">
-            <strong>Demo Analytics Store</strong>
+            <Link href="/" className="nav-brand">
+              <FiShoppingBag size={18} />
+              <strong>Demo Online Store</strong>
+            </Link>
             <div className="nav-links">
-              <Link href="/products">Products</Link>
-              <Link href="/cart">Cart</Link>
+              <NavCartLink />
             </div>
           </nav>
           <main className="container">{children}</main>

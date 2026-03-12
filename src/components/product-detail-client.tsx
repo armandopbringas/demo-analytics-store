@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { useCart } from '@/lib/cart-context';
 import { trackAddToCart, trackViewItem } from '@/lib/analytics';
@@ -8,6 +9,7 @@ import type { Product } from '@/lib/types';
 
 export function ProductDetailClient({ product }: { product: Product }) {
   const { addToCart } = useCart();
+  const router = useRouter();
   const viewedIdRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -32,7 +34,8 @@ export function ProductDetailClient({ product }: { product: Product }) {
         <h1>{product.title}</h1>
         <div className="price">${product.price.toFixed(2)}</div>
         <p>{product.description}</p>
-        <button className="button" onClick={handleAdd}>Add to cart</button>
+        <button className="button" onClick={handleAdd}>Agregar al carrito</button>
+        <button className="button secondary" onClick={() => router.back()}>Regresar</button>
       </div>
     </div>
   );

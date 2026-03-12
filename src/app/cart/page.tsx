@@ -8,7 +8,8 @@ export default function CartPage() {
 
   return (
     <div>
-      <h1>Cart</h1>
+      <h1>Carrito</h1>
+      <p><strong>Productos agregados:</strong> {itemsCount}</p>
       {itemsCount === 0 ? (
         <p className="notice">Tu carrito está vacío. Explora productos para agregar.</p>
       ) : (
@@ -40,27 +41,27 @@ export default function CartPage() {
                   className="button secondary"
                   onClick={() => removeFromCart(item.product.id)}
                 >
-                  Remove
+                  Quitar
                 </button>
               </div>
             </div>
           ))}
           <div className="summary" style={{ marginTop: 16 }}>
             <div><strong>Subtotal:</strong> ${subtotal.toFixed(2)}</div>
-            <div><strong>Items:</strong> {itemsCount}</div>
+            <div><strong>Productos:</strong> {itemsCount}</div>
           </div>
         </div>
       )}
 
-      <div style={{ marginTop: 16 }}>
-        <Link href="/checkout" className={`button ${itemsCount === 0 ? 'secondary' : ''}`}
-          aria-disabled={itemsCount === 0}
-          onClick={e => {
-            if (itemsCount === 0) e.preventDefault();
-          }}
-        >
-          Go to checkout
+      <div style={{ marginTop: 16, display: 'flex', gap: 12 }}>
+        <Link href="/" className="button secondary">
+          Inicio
         </Link>
+        {itemsCount > 0 && (
+          <Link href="/checkout" className="button">
+            Ir a pago
+          </Link>
+        )}
       </div>
     </div>
   );

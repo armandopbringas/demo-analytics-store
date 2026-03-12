@@ -70,7 +70,7 @@ export default function DebugPage() {
 
   return (
     <div>
-      <h1>Debug</h1>
+      <h1>Depuración</h1>
       <p>Último evento de analytics:</p>
       {formattedEvent ? (
         <pre className="summary" style={{ whiteSpace: 'pre-wrap' }}>{formattedEvent}</pre>
@@ -88,8 +88,8 @@ export default function DebugPage() {
       )}
 
       <div style={{ display: 'flex', gap: 12, marginTop: 12 }}>
-        <button className="button secondary" onClick={handleClearEvent}>Clear last event</button>
-        <button className="button secondary" onClick={clearCart} disabled={items.length === 0}>Clear cart</button>
+        <button className="button secondary" onClick={handleClearEvent}>Limpiar último evento</button>
+        <button className="button secondary" onClick={clearCart} disabled={items.length === 0}>Vaciar carrito</button>
       </div>
 
       <div className="summary" style={{ marginTop: 16 }}>

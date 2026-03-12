@@ -10,19 +10,31 @@ type DummyJsonProduct = {
   thumbnail: string;
 };
 
-export async function fetchProducts(): Promise<Product[]> {
-  const res = await fetch(`${BASE_URL}/products`, { cache: 'no-store' });
+export type ProductsResponse = {
+  products: Product[];
+  total: number;
+  limit: number;
+  skip: number;
+};
+
+export async function fetchProducts(limit = 30, skip = 0): Promise<ProductsResponse> {
+  const res = await fetch(`${BASE_URL}/products?limit=${limit}&skip=${skip}`, { cache: 'no-store' });
   if (!res.ok) throw new Error('Failed to fetch products');
   const data = await res.json();
   const products: DummyJsonProduct[] = data.products ?? [];
-  return products.map(product => ({
-    id: product.id,
-    title: product.title,
-    price: product.price,
-    description: product.description,
-    category: product.category,
-    image: product.thumbnail
-  }));
+  return {
+    products: products.map(product => ({
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      description: product.description,
+      category: product.category,
+      image: product.thumbnail
+    })),
+    total: data.total ?? products.length,
+    limit: data.limit ?? limit,
+    skip: data.skip ?? skip
+  };
 }
 
 export async function fetchProduct(id: string | number): Promise<Product> {

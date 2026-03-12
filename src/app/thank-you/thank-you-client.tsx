@@ -20,24 +20,24 @@ export function ThankYouClient() {
   if (!orderId) {
     return (
       <div>
-        <h1>Thank you</h1>
-        <p>No encontramos el order_id.</p>
-        <Link href="/products" className="button">Volver a productos</Link>
+        <h1>Gracias</h1>
+        <p>No encontramos el ID de la orden.</p>
+        <Link href="/" className="button">Volver al inicio</Link>
       </div>
     );
   }
 
   return (
     <div>
-      <h1>Thank you!</h1>
-      <p>Order ID: <strong>{orderId}</strong></p>
+      <h1>¡Gracias por tu compra!</h1>
+      <p>ID de la orden: <strong>{orderId}</strong></p>
 
       {order ? (
         <div className="summary">
-          <div><strong>Items:</strong> {order.items_count}</div>
+          <div><strong>Productos:</strong> {order.items_count}</div>
           <div><strong>Total:</strong> ${order.total.toFixed(2)}</div>
           <div style={{ marginTop: 12 }}>
-            <strong>Items:</strong>
+            <strong>Productos:</strong>
             <ul>
               {order.items.map(item => (
                 <li key={item.product.id}>
@@ -52,7 +52,7 @@ export function ThankYouClient() {
       )}
 
       <div style={{ marginTop: 16 }}>
-        <Link href="/products" className="button secondary">Seguir comprando</Link>
+        <Link href="/" className="button secondary">Regresar</Link>
       </div>
     </div>
   );
