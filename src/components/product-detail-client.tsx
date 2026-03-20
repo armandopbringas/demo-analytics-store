@@ -34,7 +34,18 @@ export function ProductDetailClient({ product }: { product: Product }) {
         <h1>{product.title}</h1>
         <div className="price">${product.price.toFixed(2)}</div>
         <p>{product.description}</p>
-        <button className="button" onClick={handleAdd} data-gtm="add_to_cart">Agregar al carrito</button>
+        <button
+          className="button"
+          onClick={handleAdd}
+          data-gtm="add_to_cart"
+          data-item_id={product?.id ?? ''}
+          data-item_name={product?.title ?? ''}
+          data-price={product?.price ?? ''}
+          data-currency="USD"
+          data-quantity="1"
+        >
+          Agregar al carrito
+        </button>
         <button className="button secondary" onClick={() => router.back()}>Regresar</button>
       </div>
     </div>
