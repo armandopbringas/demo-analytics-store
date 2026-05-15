@@ -1,6 +1,8 @@
 import { BASE_URL } from './constants';
 import type { Product } from './types';
 
+const SPORTS_CATEGORY = 'sports-accessories';
+
 type DummyJsonProduct = {
   id: number;
   title: string;
@@ -18,7 +20,9 @@ export type ProductsResponse = {
 };
 
 export async function fetchProducts(limit = 30, skip = 0): Promise<ProductsResponse> {
-  const res = await fetch(`${BASE_URL}/products?limit=${limit}&skip=${skip}`, { cache: 'no-store' });
+  const res = await fetch(`${BASE_URL}/products/category/${SPORTS_CATEGORY}?limit=${limit}&skip=${skip}`, {
+    cache: 'no-store'
+  });
   if (!res.ok) throw new Error('Failed to fetch products');
   const data = await res.json();
   const products: DummyJsonProduct[] = data.products ?? [];
@@ -41,6 +45,9 @@ export async function fetchProduct(id: string | number): Promise<Product> {
   const res = await fetch(`${BASE_URL}/products/${id}`, { cache: 'no-store' });
   if (!res.ok) throw new Error('Failed to fetch product');
   const product: DummyJsonProduct = await res.json();
+  if (product.category !== SPORTS_CATEGORY) {
+    throw new Error('Product is outside the sports catalog');
+  }
   return {
     id: product.id,
     title: product.title,

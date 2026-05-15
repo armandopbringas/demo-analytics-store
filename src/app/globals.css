@@ -82,6 +82,12 @@ a {
   font-weight: 700;
 }
 
+.card-meta {
+  color: #5b6874;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -283,6 +289,29 @@ a {
   justify-self: start;
 }
 
+.product-detail {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.detail-badge {
+  display: inline-flex;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #d9e7f3;
+  color: #16324a;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.detail-meta {
+  color: #5b6874;
+}
+
 @media (max-width: 900px) {
   .hero {
     min-height: 360px;
@@ -296,6 +325,9 @@ a {
     max-width: 100%;
   }
   .promo-grid {
+    grid-template-columns: 1fr;
+  }
+  .product-detail {
     grid-template-columns: 1fr;
   }
 }

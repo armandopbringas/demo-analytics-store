@@ -7,8 +7,8 @@ import { FiShoppingBag } from 'react-icons/fi';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Demo Analytics Store',
-  description: 'E-commerce demo for Digital Analytics portfolio'
+  title: 'Sports Demo Store',
+  description: 'Demo e-commerce de artículos deportivos montada sobre DummyJSON'
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -42,7 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <nav className="nav">
             <Link href="/" className="nav-brand">
               <FiShoppingBag size={18} />
-              <strong>Demo Online Store</strong>
+              <strong>Sports Demo Store</strong>
             </Link>
             <div className="nav-links">
               <NavCartLink />

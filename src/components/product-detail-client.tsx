@@ -26,13 +26,15 @@ export function ProductDetailClient({ product }: { product: Product }) {
   };
 
   return (
-    <div style={{ display: 'grid', gap: 16, gridTemplateColumns: '1fr 1fr' }}>
+    <div className="product-detail">
       <div className="card">
         <Image src={product.image} alt={product.title} width={420} height={420} />
       </div>
       <div className="card">
+        <div className="detail-badge">Sports Accessories</div>
         <h1>{product.title}</h1>
         <div className="price">${product.price.toFixed(2)}</div>
+        <p className="detail-meta">DummyJSON adaptado como catálogo demo de artículos deportivos.</p>
         <p>{product.description}</p>
         <button
           className="button"
