@@ -28,26 +28,28 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
       <section className="hero hero-full hero-full-bleed">
         <Image
           className="hero-image"
-          src="https://images.unsplash.com/photo-1674505613923-98085d3712fd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%253D%253D"
-          alt="Editorial moda"
+          src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2940&auto=format&fit=crop"
+          alt="Artículos deportivos en uso"
           width={1200}
           height={680}
           priority
         />
         <div className="hero-overlay">
-          <p className="hero-kicker">Nueva colección</p>
-          <h1>Estilo urbano para la temporada</h1>
-          <p>Descubre piezas esenciales con cortes modernos y paleta neutral.</p>
+          <p className="hero-kicker">Sports Demo Store</p>
+          <h1>Artículos deportivos listos para tu storefront demo</h1>
+          <p>Catálogo montado sobre DummyJSON con foco en accesorios para entrenamiento, running y gimnasio.</p>
         </div>
       </section>
 
-      <h2 id="catalogo" className="section-title">Nuevas llegadas</h2>
+      <h2 id="catalogo" className="section-title">Accesorios deportivos</h2>
       <div className="filters">
-      <p>Catálogo demo con DummyJSON.</p>
+        <p>Fuente: DummyJSON</p>
+        <p>Categoría: sports-accessories</p>
+        <p>{total || products.length} productos demo</p>
       </div>
       {errorMessage && (
         <div className="notice">
-          No pudimos cargar el catálogo desde DummyJSON. Intenta recargar.
+          No pudimos cargar el catálogo deportivo desde DummyJSON. Intenta recargar.
         </div>
       )}
       <div className="grid">
@@ -61,6 +63,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
             />
             <div>
               <div>{product.title}</div>
+              <div className="card-meta">Entrenamiento y performance</div>
               <div className="price">${product.price.toFixed(2)}</div>
             </div>
           </Link>
@@ -89,22 +92,22 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
 
       <section className="promo-grid">
         <div className="promo-card">
-          <span>Editorial</span>
-          <h3>Looks que elevan tu día</h3>
-          <p>Texturas suaves y capas ligeras para un estilo effortless.</p>
-          <button className="button secondary">Ver colección</button>
+          <span>Training</span>
+          <h3>Equipo ligero para sesiones intensas</h3>
+          <p>Una vitrina simple para probar browsing, clicks a PDP y eventos de add to cart.</p>
+          <Link href="/#catalogo" className="button secondary">Ver catálogo</Link>
         </div>
         <div className="promo-card">
-          <span>Destacado</span>
-          <h3>Esenciales urbanos</h3>
-          <p>Prendas atemporales que combinan con todo.</p>
-          <button className="button secondary">Explorar</button>
+          <span>Running</span>
+          <h3>Listado paginado para flujos demo</h3>
+          <p>Útil para validar navegación, checkout y tracking sobre un set corto y consistente.</p>
+          <Link href="/cart" className="button secondary">Ir al carrito</Link>
         </div>
         <div className="promo-card">
-          <span>Oferta</span>
-          <h3>Hasta 50% en básicos</h3>
-          <p>Renueva tu armario con descuentos limitados.</p>
-          <button className="button secondary">Comprar</button>
+          <span>Analytics</span>
+          <h3>Base limpia para instrumentación</h3>
+          <p>Los productos quedan normalizados para `view_item`, `add_to_cart` y el flujo completo de compra.</p>
+          <Link href="/checkout" className="button secondary">Probar checkout</Link>
         </div>
       </section>
     </div>

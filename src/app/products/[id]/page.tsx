@@ -9,7 +9,7 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
     return (
       <div>
         <h1>Producto no disponible</h1>
-        <p className="notice">No pudimos cargar este producto desde DummyJSON.</p>
+        <p className="notice">No pudimos cargar este artículo deportivo desde DummyJSON.</p>
       </div>
     );
   }
