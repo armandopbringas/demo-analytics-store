@@ -28,8 +28,8 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
       <section className="hero hero-full hero-full-bleed">
         <Image
           className="hero-image"
-          src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2940&auto=format&fit=crop"
-          alt="Artículos deportivos en uso"
+          src="https://i.pinimg.com/1200x/7a/b5/0d/7ab50d17b4173cbe17c8c89c970b0cd6.jpg"
+          alt="Editorial moda"
           width={1200}
           height={680}
           priority
